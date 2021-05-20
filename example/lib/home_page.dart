@@ -19,16 +19,15 @@ class HomeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ButtonTheme(
       height: 45,
-      child: FlatButton(
-          key: ValueKey(text),
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          padding: EdgeInsets.all(0),
-          onPressed: this.onPressed,
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.only(left: 15, right: 15),
-            child: Text(this.text),
-          )),
+      child: TextButton(
+        key: ValueKey(text),
+        onPressed: this.onPressed,
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.only(left: 15, right: 15),
+          child: Text(this.text),
+        ),
+      ),
     );
   }
 }
@@ -103,8 +102,10 @@ class HomeScreen extends StatelessWidget {
 }
 
 void displaySnackBar(BuildContext context) {
-  Scaffold.of(context).showSnackBar(SnackBar(
-    duration: Duration(seconds: 1),
-    content: Text('Not implemented, pull request is welcome 👏👏🍺🍺'),
-  ));
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      duration: Duration(seconds: 1),
+      content: Text('Not implemented, pull request is welcome 👏👏🍺🍺'),
+    ),
+  );
 }

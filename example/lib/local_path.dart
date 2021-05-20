@@ -27,7 +27,7 @@ class LocalPath extends StatefulWidget {
 class _LocalPathState extends State<LocalPath> {
   bool root = true;
 
-  List<FileSystemEntity> files = List();
+  List<FileSystemEntity> files = [];
   Directory current = Directory.current;
 
   StreamSubscription _subscription;
@@ -38,15 +38,17 @@ class _LocalPathState extends State<LocalPath> {
   }
 
   void cantOpenSnackBar() {
-    Scaffold.of(context).showSnackBar(SnackBar(
-      duration: Duration(seconds: 1),
-      content: Text('Something error when openning this file/dir'),
-    ));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 1),
+        content: Text('Something error when openning this file/dir'),
+      ),
+    );
   }
 
   void listDir(String path) {
     bool opened = true;
-    List<FileSystemEntity> tmpFiles = List();
+    List<FileSystemEntity> tmpFiles = [];
     FileSystemEntity.isDirectory(path).then((f) {
       if (f) {
         final Directory dir = Directory(path);
@@ -79,9 +81,8 @@ class _LocalPathState extends State<LocalPath> {
     final text = parent ? ".." : path.substring(parentLength + 1);
     final IconData icon = isDir ? Icons.folder : Icons.music_video;
 
-    return FlatButton(
+    return TextButton(
       key: ValueKey(path),
-      padding: EdgeInsets.only(left: 5, right: 5),
       child: Row(children: <Widget>[
         Icon(icon),
         Padding(padding: EdgeInsets.only(left: 5)),
@@ -109,7 +110,6 @@ class _LocalPathState extends State<LocalPath> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _subscription?.cancel();
   }
